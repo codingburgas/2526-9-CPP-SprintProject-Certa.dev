@@ -1,11 +1,11 @@
 #include <QApplication>
-#include "presentationLayer/home/home.h"
+#include "layout.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    Home home;
-    home.show();
+    Layout layout;
+    layout.show();
 
     return app.exec();
 }

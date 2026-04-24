@@ -1,6 +1,6 @@
 #pragma once
 
-#include <QMainWindow>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -9,7 +9,7 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-class Home : public QMainWindow {
+class Home : public QWidget {
     Q_OBJECT
 
 public:

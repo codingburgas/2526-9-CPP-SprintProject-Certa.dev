@@ -5,17 +5,34 @@ find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets)
 
 qt_standard_project_setup()
 
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
 set(PROJECT_SOURCES
     main.cpp
 
-    presentationLayer/home/home.cpp
-    presentationLayer/home/home.h
-    presentationLayer/home/home.ui
+    assets/icons.qrc
+
+    presentationLayer/theme/color_theme.json
+
+    presentationLayer/layout/layout.cpp
+    presentationLayer/layout/layout.h
+    presentationLayer/layout/layout.ui
+
+    presentationLayer/widgets/home/home.cpp
+    presentationLayer/widgets/home/home.h
+    presentationLayer/widgets/home/home.ui
+
+    presentationLayer/widgets/movies/movies.cpp
+    presentationLayer/widgets/movies/movies.h
+    presentationLayer/widgets/movies/movies.ui
 )
 
 qt_add_executable(Certa.dev
     ${PROJECT_SOURCES}
 )
+
 
 target_link_libraries(Certa.dev PRIVATE
     Qt::Core
@@ -24,8 +41,9 @@ target_link_libraries(Certa.dev PRIVATE
 
 target_include_directories(Certa.dev PRIVATE
     ${CMAKE_SOURCE_DIR}
-
-    ${CMAKE_SOURCE_DIR}/presentationLayer/home
+    ${CMAKE_SOURCE_DIR}/presentationLayer/layout
+    ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/home
+    ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/movies
 )
 
 include(GNUInstallDirs)
