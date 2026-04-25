@@ -12,7 +12,8 @@ set(CMAKE_AUTORCC ON)
 set(PROJECT_SOURCES
     main.cpp
 
-    assets/icons.qrc
+    assets/resources.qrc
+    assets/Certadev.db
 
     presentationLayer/theme/color_theme.json
 
