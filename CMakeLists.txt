@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.19)
 project(Certa.dev LANGUAGES CXX)
 
-find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets Sql)
+find_package(Qt6 6.5 REQUIRED COMPONENTS Core Widgets Sql Network)
 
 qt_standard_project_setup()
 
@@ -46,6 +46,9 @@ set(PROJECT_SOURCES
     serviceLayer/authService/authService.cpp
     serviceLayer/authService/authService.h
 
+    serviceLayer/authService/passwordHasher/passwordHasher.cpp
+    serviceLayer/authService/passwordHasher/passwordHasher.h
+
     serviceLayer/userService/userService.cpp
     serviceLayer/userService/userService.h
 
@@ -85,6 +88,7 @@ target_link_libraries(Certa.dev PRIVATE
     Qt::Core
     Qt::Widgets
     Qt::Sql
+    Qt::Network
 )
 
 target_include_directories(Certa.dev PRIVATE
@@ -98,6 +102,7 @@ target_include_directories(Certa.dev PRIVATE
 
     ${CMAKE_SOURCE_DIR}/serviceLayer/userSession
     ${CMAKE_SOURCE_DIR}/serviceLayer/authService
+    ${CMAKE_SOURCE_DIR}/serviceLayer/authService/passwordHasher
     ${CMAKE_SOURCE_DIR}/serviceLayer/userService
     ${CMAKE_SOURCE_DIR}/serviceLayer/movieService
 

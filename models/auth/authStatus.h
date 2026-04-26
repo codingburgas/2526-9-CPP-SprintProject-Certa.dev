@@ -8,6 +8,5 @@ enum class SignUpStatus {
 enum class SignInStatus {
     Success,
     UserNotFound,
-    InvalidPassword,
     Failure
 };

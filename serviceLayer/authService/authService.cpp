@@ -4,6 +4,7 @@
 #include "user.h"
 #include "userResponse.h"
 #include "userSession.h"
+#include "passwordHasher.h"
 
 namespace AuthService {
     AuthResponse signUp(const QString &username, const QString &password) {
@@ -11,7 +12,7 @@ namespace AuthService {
             return {.success = false, .errorMessage = "User already exists."};
         }
 
-        switch (AuthRepository::signUp(username, password)) {
+        switch (AuthRepository::signUp(username, PasswordHasher::hashPassword(password))) {
             case SignUpStatus::Success: {
                 User user;
                 user.username = username;
@@ -28,14 +29,20 @@ namespace AuthService {
     }
 
     AuthResponse signIn(const QString &username, const QString &password) {
-        switch (AuthRepository::signIn(username, password)) {
+        QString storedHashedPassword;
+
+        switch (AuthRepository::signIn(username, storedHashedPassword)) {
             case SignInStatus::Success: {
+                if (!PasswordHasher::verifyPassword(password, storedHashedPassword)) {
+                    return {.success = false, .errorMessage = "Invalid password."};
+                }
+
                 User user;
                 user.username = username;
 
                 UserInterestsResponse interestsResponse = UserRepository::getUserInterests(username);
                 if (!interestsResponse.success) {
-                    return {.success = false, .errorMessage = "An error occurred during sign-in."};
+                    return {.success = false, .errorMessage = "Couldn't fetch user's interests."};
                 }
 
                 user.interestsGenres = interestsResponse.data;
@@ -45,7 +52,6 @@ namespace AuthService {
                 return {.success = true, .errorMessage = ""};
             }
             case SignInStatus::UserNotFound: return {.success = false, .errorMessage = "User not found."};
-            case SignInStatus::InvalidPassword: return {.success = false, .errorMessage = "Invalid password."};
             case SignInStatus::Failure: return {.success = false, .errorMessage = "An error occurred during sign-in."};
         }
 
