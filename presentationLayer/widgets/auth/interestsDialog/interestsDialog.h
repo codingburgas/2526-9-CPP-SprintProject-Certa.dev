@@ -14,9 +14,9 @@ class InterestsDialog : public QWidget {
     Q_OBJECT
 
 public:
-    InterestsDialog(QWidget *parent = nullptr);
+    explicit InterestsDialog(QWidget *parent = nullptr);
 
-    ~InterestsDialog();
+    ~InterestsDialog() override;
 
 private slots:
     void on_saveButton_clicked();

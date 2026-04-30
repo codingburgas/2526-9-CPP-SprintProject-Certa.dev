@@ -1,9 +1,9 @@
 #pragma once
 
 #include <QMainWindow>
-
 #include "home.h"
 #include "movies.h"
+#include "profile.h"
 #include "settings.h"
 
 QT_BEGIN_NAMESPACE
@@ -17,11 +17,13 @@ class Layout : public QMainWindow {
     Q_OBJECT
 
 public:
-    Layout(QWidget *parent = nullptr);
+    explicit Layout(QWidget *parent = nullptr);
 
-    ~Layout();
+    ~Layout() override;
 
 private slots:
+    void on_topBarSearchLineEdit_textEdited(const QString &text);
+
     void on_sidebarHomeButton_clicked();
 
     void on_sidebarMoviesButton_clicked();
@@ -34,13 +36,17 @@ private:
     enum class NavCurrentButtonIndex {
         Home,
         Movies,
+        Profile,
         Settings
     };
 
     void setNavActive(NavCurrentButtonIndex index);
 
+    void refreshUserBadge();
+
     Ui::Layout *ui;
     Home *homePage;
     Movies *moviesPage;
+    Profile *profilePage;
     Settings *settingsPage;
 };

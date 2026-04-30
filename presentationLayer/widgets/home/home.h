@@ -13,9 +13,9 @@ class Home : public QWidget {
     Q_OBJECT
 
 public:
-    Home(QWidget *parent = nullptr);
+    explicit Home(QWidget *parent = nullptr);
 
-    ~Home();
+    ~Home() override;
 
 private:
     Ui::Home *ui;

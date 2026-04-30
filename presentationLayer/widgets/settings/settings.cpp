@@ -64,8 +64,8 @@ void Settings::applyInterestsSelection() {
     }
 
     QVector<QString> selected;
-    for (const auto &genre : currentUser->interestsGenres) {
-        selected.append(genre);
+    for (int i = 0; i < currentUser->interestsGenres.size(); i++) {
+        selected.append(currentUser->interestsGenres[i]);
     }
 
     for (int i = 0; i < ui->genresGridLayout->count(); i++) {
@@ -240,11 +240,7 @@ void Settings::on_deleteAccountButton_clicked() {
 
     AuthService::logout();
 
-    QWidget *window = this->window();
-    if (window) {
-        window->hide();
-    }
-
+    this->hide();
     auto authPage = new Auth();
     authPage->show();
 }

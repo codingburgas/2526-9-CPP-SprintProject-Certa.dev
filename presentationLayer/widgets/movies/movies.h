@@ -13,9 +13,9 @@ class Movies : public QWidget {
     Q_OBJECT
 
 public:
-    Movies(QWidget *parent = nullptr);
+    explicit Movies(QWidget *parent = nullptr);
 
-    ~Movies();
+    ~Movies() override;
 
 private:
     Ui::Movies *ui;

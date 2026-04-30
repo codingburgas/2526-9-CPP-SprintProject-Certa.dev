@@ -64,10 +64,34 @@
     background-color: transparent;
   }
 
-  #topBarTitleLabel {
-    font-size: 18px;
-    font-weight: 600;
+  #topBarSearchLineEdit {
+    background-color: #181818;
+    border: 1px solid #181818;
+    border-radius: 14px;
     color: #FFFFFF;
+    font-size: 13px;
+    padding-left: 14px;
+    padding-right: 14px;
+    selection-background-color: #AE1A19;
+  }
+
+  #topBarSearchLineEdit:focus {
+    border: 1px solid #AE1A19;
+    background-color: #0F0F11;
+  }
+
+  #topBarUsernameLabel {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  #topBarAvatarLabel {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 18px;
+    background-color: #AE1A19;
   }
 
   #sidebarHomeButton,
@@ -90,6 +114,7 @@
 
   #sidebarHomeButton:checked,
   #sidebarMoviesButton:checked,
+  #sidebarAuthButton:checked,
   #sidebarSettingsButton:checked {
     background-color: rgba(174, 26, 25, 92);
     border-color: transparent;
@@ -107,10 +132,16 @@
 
   #sidebarHomeButton:checked:hover,
   #sidebarMoviesButton:checked:hover,
+  #sidebarAuthButton:checked:hover,
   #sidebarSettingsButton:checked:hover {
     background-color: rgba(174, 26, 25, 120);
     border-color: transparent;
     color: #FFFFFF;
+  }
+
+  #sidebarDivider {
+    background-color: #2A2A2C;
+    border: none;
   }
   </string>
    </property>
@@ -237,11 +268,27 @@
         <bool>true</bool>
        </property>
       </widget>
+      <widget class="QFrame" name="sidebarDivider">
+       <property name="geometry">
+        <rect>
+         <x>16</x>
+         <y>218</y>
+         <width>218</width>
+         <height>1</height>
+        </rect>
+       </property>
+       <property name="frameShape">
+        <enum>QFrame::Shape::HLine</enum>
+       </property>
+       <property name="frameShadow">
+        <enum>QFrame::Shadow::Plain</enum>
+       </property>
+      </widget>
       <widget class="QPushButton" name="sidebarAuthButton">
        <property name="geometry">
         <rect>
          <x>8</x>
-         <y>620</y>
+         <y>228</y>
          <width>234</width>
          <height>50</height>
         </rect>
@@ -322,17 +369,52 @@
           <height>75</height>
          </size>
         </property>
-        <widget class="QLabel" name="topBarTitleLabel">
+        <widget class="QLineEdit" name="topBarSearchLineEdit">
          <property name="geometry">
           <rect>
            <x>24</x>
-           <y>22</y>
-           <width>400</width>
-           <height>30</height>
+           <y>20</y>
+           <width>320</width>
+           <height>36</height>
+          </rect>
+         </property>
+         <property name="placeholderText">
+          <string>Search movies...</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="topBarUsernameLabel">
+         <property name="geometry">
+          <rect>
+           <x>478</x>
+           <y>20</y>
+           <width>200</width>
+           <height>36</height>
           </rect>
          </property>
          <property name="text">
-          <string>Movie Collection</string>
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignVCenter</set>
+         </property>
+        </widget>
+        <widget class="QLabel" name="topBarAvatarLabel">
+         <property name="geometry">
+          <rect>
+           <x>690</x>
+           <y>19</y>
+           <width>36</width>
+           <height>36</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </widget>
@@ -376,6 +458,22 @@
         </widget>
         <widget class="QWidget" name="settingsStackPage">
          <layout class="QVBoxLayout" name="settingsPageLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="profileStackPage">
+         <layout class="QVBoxLayout" name="profilePageLayout">
           <property name="leftMargin">
            <number>0</number>
           </property>

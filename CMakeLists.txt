@@ -43,6 +43,10 @@ set(PROJECT_SOURCES
     presentationLayer/widgets/settings/settings.h
     presentationLayer/widgets/settings/settings.ui
 
+    presentationLayer/widgets/profile/profile.cpp
+    presentationLayer/widgets/profile/profile.h
+    presentationLayer/widgets/profile/profile.ui
+
 
     serviceLayer/userSession/userSession.cpp
     serviceLayer/userSession/userSession.h
@@ -87,7 +91,6 @@ qt_add_executable(Certa.dev
     ${PROJECT_SOURCES}
 )
 
-
 target_link_libraries(Certa.dev PRIVATE
     Qt::Core
     Qt::Widgets
@@ -104,6 +107,7 @@ target_include_directories(Certa.dev PRIVATE
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/auth/interestsDialog
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/movies
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/settings
+    ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/profile
 
     ${CMAKE_SOURCE_DIR}/serviceLayer/userSession
     ${CMAKE_SOURCE_DIR}/serviceLayer/authService

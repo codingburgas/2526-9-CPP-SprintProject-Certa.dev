@@ -12,9 +12,9 @@ class Auth : public QWidget {
     Q_OBJECT
 
 public:
-    Auth(QWidget *parent = nullptr);
+    explicit Auth(QWidget *parent = nullptr);
 
-    ~Auth();
+    ~Auth() override;
 
 private slots:
     void on_signin_signInButton_clicked();

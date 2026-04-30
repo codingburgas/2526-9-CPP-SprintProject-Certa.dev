@@ -1,3 +1,7 @@
+// File reference only
+// Not loaded at runtime
+// Theme tokens are applied directly in Qt stylesheets
+
 {
   "background": "#0F0F11",
   "primary": "#AE1A19",

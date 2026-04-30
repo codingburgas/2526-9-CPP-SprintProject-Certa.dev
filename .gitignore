@@ -53,6 +53,8 @@ moc_*.o
 .vscode/
 .github/
 .opencode/
+.claude/
+CLAUDE.md
 *.sublime-workspace
 *.sublime-project
 

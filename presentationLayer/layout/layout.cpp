@@ -1,6 +1,8 @@
 #include "layout.h"
+#include <QFontMetrics>
 #include "auth.h"
 #include "ui_layout.h"
+#include "userSession.h"
 
 Layout::Layout(QWidget *parent) : QMainWindow(parent), ui(new Ui::Layout) {
     ui->setupUi(this);
@@ -11,10 +13,40 @@ Layout::Layout(QWidget *parent) : QMainWindow(parent), ui(new Ui::Layout) {
     moviesPage = new Movies(this);
     ui->moviesPageLayout->addWidget(moviesPage);
 
+    profilePage = new Profile(this);
+    ui->profilePageLayout->addWidget(profilePage);
+    connect(profilePage, &Profile::logoutRequested, this, [this]() {
+        UserSession::instance().clearUser();
+        ui->sidebarAuthButton->setText("  Sign In / Sign Up");
+        refreshUserBadge();
+        on_sidebarHomeButton_clicked();
+    });
+
     settingsPage = new Settings(this);
     ui->settingsPageLayout->addWidget(settingsPage);
 
+    if (UserSession::instance().isLoggedIn()) {
+        ui->sidebarAuthButton->setText("  Profile");
+    }
+
+    refreshUserBadge();
+
     on_sidebarHomeButton_clicked();
+}
+
+void Layout::refreshUserBadge() {
+    const auto currentUser = UserSession::instance().getCurrentUser();
+    const QString name = currentUser ? currentUser->username : QStringLiteral("Guest");
+    const QFontMetrics metrics(ui->topBarUsernameLabel->font());
+    ui->topBarUsernameLabel->setText(metrics.elidedText(name, Qt::ElideRight, ui->topBarUsernameLabel->width()));
+
+    const QString initial = name.isEmpty() ? "?" : name.left(1).toUpper();
+    ui->topBarAvatarLabel->setText(initial);
+}
+
+void Layout::on_topBarSearchLineEdit_textEdited(const QString &text) {
+    Q_UNUSED(text); // will be deleted later when search is made
+    on_sidebarMoviesButton_clicked();
 }
 
 Layout::~Layout() {
@@ -24,6 +56,7 @@ Layout::~Layout() {
 void Layout::setNavActive(NavCurrentButtonIndex index) {
     ui->sidebarHomeButton->setChecked(index == NavCurrentButtonIndex::Home);
     ui->sidebarMoviesButton->setChecked(index == NavCurrentButtonIndex::Movies);
+    ui->sidebarAuthButton->setChecked(index == NavCurrentButtonIndex::Profile);
     ui->sidebarSettingsButton->setChecked(index == NavCurrentButtonIndex::Settings);
 }
 
@@ -38,9 +71,14 @@ void Layout::on_sidebarMoviesButton_clicked() {
 }
 
 void Layout::on_sidebarAuthButton_clicked() {
-    this->hide();
-    auto authPage = new Auth();
-    authPage->show();
+    if (UserSession::instance().isLoggedIn()) {
+        setNavActive(NavCurrentButtonIndex::Profile);
+        ui->stackedWidget->setCurrentWidget(ui->profileStackPage);
+    } else {
+        this->hide();
+        auto authPage = new Auth();
+        authPage->show();
+    }
 }
 
 void Layout::on_sidebarSettingsButton_clicked() {
