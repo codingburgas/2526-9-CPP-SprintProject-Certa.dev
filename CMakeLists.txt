@@ -39,6 +39,10 @@ set(PROJECT_SOURCES
     presentationLayer/widgets/movies/movies.h
     presentationLayer/widgets/movies/movies.ui
 
+    presentationLayer/widgets/movies/movie/movie.cpp
+    presentationLayer/widgets/movies/movie/movie.h
+    presentationLayer/widgets/movies/movie/movie.ui
+
     presentationLayer/widgets/settings/settings.cpp
     presentationLayer/widgets/settings/settings.h
     presentationLayer/widgets/settings/settings.ui
@@ -83,7 +87,7 @@ set(PROJECT_SOURCES
     models/auth/authStatus.h
     models/auth/authResponse.h
 
-    models/movie/movie.h
+    models/movie/movieDto.h
     models/movie/movieStatus.h
     models/movie/movieResponse.h
 )
@@ -107,6 +111,7 @@ target_include_directories(Certa.dev PRIVATE
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/auth
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/auth/interestsDialog
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/movies
+    ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/movies/movie
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/settings
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/profile
 

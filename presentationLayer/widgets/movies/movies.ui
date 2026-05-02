@@ -32,10 +32,19 @@ QScrollArea > QWidget#qt_scrollarea_viewport {
 #scrollContent {
     background-color: transparent;
 }
+#moviesStackedWidget,
+#moviesListPage,
+#moviePageHost {
+    background-color: transparent;
+}
 QFrame#movieCard {
     background-color: #181818;
     border-radius: 8px;
     border: 1px solid #181818;
+}
+QFrame#movieCard:hover {
+    background-color: #232325;
+    border: 1px solid #2A2A2C;
 }
 QLabel#movieCardTitle {
     color: #FFFFFF;
@@ -55,44 +64,89 @@ QLabel#movieCardReviews {
     font-size: 12px;
 }</string>
   </property>
-  <layout class="QVBoxLayout" name="moviesLayout">
+  <layout class="QVBoxLayout" name="moviesRootLayout">
    <property name="spacing">
-    <number>16</number>
+    <number>0</number>
    </property>
    <property name="leftMargin">
-    <number>24</number>
+    <number>0</number>
    </property>
    <property name="topMargin">
-    <number>24</number>
+    <number>0</number>
    </property>
    <property name="rightMargin">
-    <number>24</number>
+    <number>0</number>
    </property>
    <property name="bottomMargin">
-    <number>24</number>
+    <number>0</number>
    </property>
    <item>
-    <widget class="QLabel" name="moviesTitleLabel">
-     <property name="text">
-      <string>Movies</string>
+    <widget class="QStackedWidget" name="moviesStackedWidget">
+     <property name="currentIndex">
+      <number>0</number>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QScrollArea" name="moviesScrollArea">
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <property name="frameShape">
-      <enum>QFrame::NoFrame</enum>
-     </property>
-     <widget class="QWidget" name="scrollContent">
-      <layout class="QGridLayout" name="moviesGrid">
-       <property name="horizontalSpacing">
+     <widget class="QWidget" name="moviesListPage">
+      <layout class="QVBoxLayout" name="moviesLayout">
+       <property name="spacing">
+        <number>16</number>
+       </property>
+       <property name="leftMargin">
         <number>24</number>
        </property>
-       <property name="verticalSpacing">
-        <number>32</number>
+       <property name="topMargin">
+        <number>24</number>
+       </property>
+       <property name="rightMargin">
+        <number>24</number>
+       </property>
+       <property name="bottomMargin">
+        <number>24</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="moviesTitleLabel">
+         <property name="text">
+          <string>Movies</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QScrollArea" name="moviesScrollArea">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <widget class="QWidget" name="scrollContent">
+          <layout class="QGridLayout" name="moviesGrid">
+           <property name="horizontalSpacing">
+            <number>24</number>
+           </property>
+           <property name="verticalSpacing">
+            <number>32</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="moviePageHost">
+      <layout class="QVBoxLayout" name="moviePageHostLayout">
+       <property name="spacing">
+        <number>0</number>
        </property>
        <property name="leftMargin">
         <number>0</number>

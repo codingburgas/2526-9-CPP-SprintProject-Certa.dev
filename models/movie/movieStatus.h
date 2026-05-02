@@ -9,3 +9,14 @@ enum class GetAllMoviesStatus {
     Success,
     Failure
 };
+
+enum class CreateReviewStatus {
+    Success,
+    UserNotFound,
+    Failure
+};
+
+enum class GetReviewsStatus {
+    Success,
+    Failure
+};

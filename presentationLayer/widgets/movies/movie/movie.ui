@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Movie</class>
+ <widget class="QWidget" name="Movie">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Movie</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#Movie {
+    background-color: #0F0F11;
+}
+QScrollArea {
+    border: none;
+    background-color: transparent;
+}
+QScrollArea > QWidget#qt_scrollarea_viewport {
+    background-color: transparent;
+}
+#movieScrollContent {
+    background-color: transparent;
+}
+QPushButton#movieBackButton {
+    color: #FFFFFF;
+    background-color: #181818;
+    border: 1px solid #181818;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+}
+QPushButton#movieBackButton:hover {
+    background-color: #232325;
+    border-color: #2A2A2C;
+}
+QLabel#movieTitleLabel {
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 700;
+}
+QLabel#movieMetaLabel {
+    color: #6C6C6E;
+    font-size: 13px;
+}
+QLabel#movieGenresLabel {
+    color: #FFFFFF;
+    font-size: 13px;
+    background-color: #181818;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+QLabel#movieRatingLabel {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 700;
+}
+QLabel#movieReviewCountLabel {
+    color: #6C6C6E;
+    font-size: 13px;
+}
+QLabel#movieDescriptionLabel {
+    color: #E6E6E6;
+    font-size: 14px;
+    line-height: 1.4;
+}
+QLabel#moviePosterLabel {
+    background-color: #181818;
+    border-radius: 8px;
+}
+QLabel#reviewsTitleLabel,
+QLabel#addReviewTitleLabel {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 700;
+}
+QLabel#reviewsEmptyLabel {
+    color: #6C6C6E;
+    font-size: 13px;
+}
+QFrame#addReviewCard,
+QFrame#reviewItem {
+    background-color: #181818;
+    border-radius: 12px;
+    border: 1px solid #181818;
+}
+QLabel#ratingFieldLabel,
+QLabel#commentFieldLabel {
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 600;
+}
+QLabel#reviewItemUser {
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+}
+QLabel#reviewItemRating {
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 700;
+}
+QLabel#reviewItemComment {
+    color: #E6E6E6;
+    font-size: 13px;
+}
+QDoubleSpinBox#reviewRatingSpinBox {
+    background-color: #0F0F11;
+    color: #FFFFFF;
+    border: 1px solid #2A2A2A;
+    border-radius: 8px;
+    padding: 6px 8px;
+    min-height: 28px;
+    min-width: 100px;
+}
+QPlainTextEdit#reviewCommentEdit {
+    background-color: #0F0F11;
+    color: #FFFFFF;
+    border: 1px solid #2A2A2A;
+    border-radius: 8px;
+    padding: 8px 10px;
+    font-size: 13px;
+}
+QPushButton#submitReviewButton {
+    min-height: 36px;
+    padding: 0 18px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #FFFFFF;
+    background-color: #AE1A19;
+    border: 1px solid #AE1A19;
+}
+QPushButton#submitReviewButton:hover {
+    background-color: #951615;
+    border-color: #951615;
+}
+QPushButton#submitReviewButton:disabled {
+    background-color: #3A1A1A;
+    border-color: #3A1A1A;
+    color: #6C6C6E;
+}
+QLabel#reviewStatusLabel {
+    color: #6C6C6E;
+    font-size: 12px;
+}
+QLabel#reviewStatusLabel[state=&quot;error&quot;] {
+    color: #EF4444;
+}
+QLabel#reviewStatusLabel[state=&quot;success&quot;] {
+    color: #22C55E;
+}
+QLabel#signInNoticeLabel {
+    color: #6C6C6E;
+    font-size: 13px;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="moviePageRootLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QScrollArea" name="movieScrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <widget class="QWidget" name="movieScrollContent">
+      <layout class="QVBoxLayout" name="movieScrollLayout">
+       <property name="spacing">
+        <number>20</number>
+       </property>
+       <property name="leftMargin">
+        <number>24</number>
+       </property>
+       <property name="topMargin">
+        <number>24</number>
+       </property>
+       <property name="rightMargin">
+        <number>24</number>
+       </property>
+       <property name="bottomMargin">
+        <number>24</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="movieBackRow">
+         <item>
+          <widget class="QPushButton" name="movieBackButton">
+           <property name="text">
+            <string>← Back</string>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="movieBackSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="movieHeaderLayout">
+         <property name="spacing">
+          <number>20</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="moviePosterLabel">
+           <property name="minimumSize">
+            <size>
+             <width>220</width>
+             <height>320</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>220</width>
+             <height>320</height>
+            </size>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="movieInfoLayout">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="movieTitleLabel">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="movieMetaLabel">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="movieGenresLabel">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="movieStatsLayout">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="movieStarIcon">
+               <property name="minimumSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+               <property name="maximumSize">
+                <size>
+                 <width>16</width>
+                 <height>16</height>
+                </size>
+               </property>
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="movieRatingLabel">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="movieReviewCountLabel">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="movieStatsSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QLabel" name="movieDescriptionLabel">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignTop</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="movieInfoSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QFrame" name="addReviewCard">
+         <layout class="QVBoxLayout" name="addReviewLayout">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <property name="leftMargin">
+           <number>16</number>
+          </property>
+          <property name="topMargin">
+           <number>16</number>
+          </property>
+          <property name="rightMargin">
+           <number>16</number>
+          </property>
+          <property name="bottomMargin">
+           <number>16</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="addReviewTitleLabel">
+            <property name="text">
+             <string>Leave a review</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="signInNoticeLabel">
+            <property name="text">
+             <string>Sign in to leave a review.</string>
+            </property>
+            <property name="visible">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="ratingFieldLayout">
+            <property name="spacing">
+             <number>10</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="ratingFieldLabel">
+              <property name="text">
+               <string>Rating (1.0 - 10.0)</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="reviewRatingSpinBox">
+              <property name="decimals">
+               <number>1</number>
+              </property>
+              <property name="minimum">
+               <double>1.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>10.000000000000000</double>
+              </property>
+              <property name="singleStep">
+               <double>0.100000000000000</double>
+              </property>
+              <property name="value">
+               <double>8.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="ratingFieldSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="commentFieldLabel">
+            <property name="text">
+             <string>Comment (optional)</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPlainTextEdit" name="reviewCommentEdit">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>90</height>
+             </size>
+            </property>
+            <property name="placeholderText">
+             <string>Share your thoughts...</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="submitRowLayout">
+            <item>
+             <widget class="QLabel" name="reviewStatusLabel">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="submitSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="submitReviewButton">
+              <property name="text">
+               <string>Submit review</string>
+              </property>
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="reviewsTitleLabel">
+         <property name="text">
+          <string>Reviews</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="reviewsEmptyLabel">
+         <property name="text">
+          <string>No reviews yet. Be the first to leave one.</string>
+         </property>
+         <property name="visible">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="reviewsListLayout">
+         <property name="spacing">
+          <number>10</number>
+         </property>
+        </layout>
+       </item>
+       <item>
+        <spacer name="bottomSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../../../assets/resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

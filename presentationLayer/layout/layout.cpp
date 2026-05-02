@@ -67,6 +67,7 @@ void Layout::on_sidebarHomeButton_clicked() {
 
 void Layout::on_sidebarMoviesButton_clicked() {
     setNavActive(NavCurrentButtonIndex::Movies);
+    moviesPage->showList();
     ui->stackedWidget->setCurrentWidget(ui->moviesStackPage);
 }
 

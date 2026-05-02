@@ -1,6 +1,6 @@
 #pragma once
 #include <QVector>
-#include "movie.h"
+#include "movieDto.h"
 
 struct MovieResponse {
     bool success;
@@ -11,5 +11,22 @@ struct MovieResponse {
 struct GetMoviesResponse {
     bool success;
     QString errorMessage;
-    QVector<Movie> movies;
+    QVector<MovieDto> movies;
+};
+
+struct GetMovieResponse {
+    bool success;
+    QString errorMessage;
+    MovieDto movie;
+};
+
+struct ReviewResponse {
+    bool success;
+    QString errorMessage;
+};
+
+struct GetReviewsResponse {
+    bool success;
+    QString errorMessage;
+    QVector<Review> reviews;
 };
