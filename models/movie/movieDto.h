@@ -1,7 +1,7 @@
 #pragma once
 #include <QString>
 
-struct Movie {
+struct MovieDto {
     int id;
     QString title;
     QString description;
@@ -11,4 +11,11 @@ struct Movie {
     QString posterPath;
     int reviewCount;
     QString genres;
+};
+
+struct Review {
+    int id;
+    QString username;
+    double rating;
+    QString comment;
 };

@@ -9,4 +9,17 @@ namespace MovieService {
     GetMoviesResponse getAllMovies() {
         return MovieRepository::getAllMovies();
     }
+
+    GetMovieResponse getMovieById(int id) {
+        return MovieRepository::getMovieById(id);
+    }
+
+    ReviewResponse createReview(const QString &username, const int &movieId, const double &rating,
+                                const QString &comment) {
+        return MovieRepository::createReview(username, movieId, rating, comment);
+    }
+
+    GetReviewsResponse getReviewsForMovie(int movieId) {
+        return MovieRepository::getReviewsForMovie(movieId);
+    }
 }
