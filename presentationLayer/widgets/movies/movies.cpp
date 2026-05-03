@@ -41,7 +41,48 @@ void Movies::loadMovies() {
         return;
     }
 
-    const QVector<MovieDto> movies = response.movies;
+    _allMovies = response.movies;
+    renderMovies(_allMovies);
+}
+
+void Movies::reloadMovies() {
+    GetMoviesResponse response = MovieService::getAllMovies();
+    if (!response.success) {
+        qDebug() << "Failed to load movies:" << response.errorMessage;
+        return;
+    }
+
+    _allMovies = response.movies;
+    filterMovies(_currentQuery);
+}
+
+void Movies::filterMovies(const QString &query) {
+    _currentQuery = query;
+
+    if (query.isEmpty()) {
+        renderMovies(_allMovies);
+        return;
+    }
+
+    QVector<MovieDto> filtered;
+    for (int i = 0; i < _allMovies.size(); i++) {
+        MovieDto movie = _allMovies[i];
+        if (movie.title.toLower().contains(query.toLower())) {
+            filtered.append(movie);
+        }
+    }
+    renderMovies(filtered);
+}
+
+void Movies::renderMovies(const QVector<MovieDto> &movies) {
+    QLayoutItem *item;
+    while ((item = ui->moviesGrid->takeAt(0)) != nullptr) {
+        if (QWidget *widget = item->widget()) {
+            widget->deleteLater();
+        }
+        delete item;
+    }
+
     for (int i = 0; i < movies.size(); i++) {
         int row = i / COLUMNS;
         int col = i % COLUMNS;
@@ -50,17 +91,6 @@ void Movies::loadMovies() {
         ui->moviesGrid->addWidget(card, row, col);
     }
 
-    int lastRow = (movies.size() - 1) / COLUMNS + 1;
+    int lastRow = movies.isEmpty() ? 0 : (movies.size() - 1) / COLUMNS + 1;
     ui->moviesGrid->setRowStretch(lastRow, 1);
-}
-
-void Movies::reloadMovies() {
-    QLayoutItem *item;
-    while ((item = ui->moviesGrid->takeAt(0)) != nullptr) {
-        if (QWidget *widget = item->widget()) {
-            widget->deleteLater();
-        }
-        delete item;
-    }
-    loadMovies();
 }

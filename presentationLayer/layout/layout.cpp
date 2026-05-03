@@ -53,8 +53,10 @@ void Layout::refreshUserBadge() {
 }
 
 void Layout::on_topBarSearchLineEdit_textEdited(const QString &text) {
-    Q_UNUSED(text); // will be deleted later when search is made
-    on_sidebarMoviesButton_clicked();
+    setNavActive(NavCurrentButtonIndex::Movies);
+    moviesPage->showList();
+    ui->stackedWidget->setCurrentWidget(ui->moviesStackPage);
+    moviesPage->filterMovies(text);
 }
 
 Layout::~Layout() {
@@ -83,6 +85,8 @@ void Layout::on_sidebarHomeButton_clicked() {
 
 void Layout::on_sidebarMoviesButton_clicked() {
     setNavActive(NavCurrentButtonIndex::Movies);
+    ui->topBarSearchLineEdit->clear();
+    moviesPage->filterMovies("");
     moviesPage->showList();
     ui->stackedWidget->setCurrentWidget(ui->moviesStackPage);
 }
