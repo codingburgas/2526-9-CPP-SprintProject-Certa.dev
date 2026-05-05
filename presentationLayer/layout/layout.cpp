@@ -34,6 +34,9 @@ Layout::Layout(QWidget *parent) : QMainWindow(parent), ui(new Ui::Layout) {
         homePage->refresh();
         on_sidebarHomeButton_clicked();
     });
+    connect(profilePage, &Profile::editProfileRequested, this, &Layout::on_sidebarSettingsButton_clicked);
+    connect(profilePage, &Profile::viewFavoritesRequested, this, &Layout::on_sidebarFavoritesButton_clicked);
+    connect(profilePage, &Profile::movieClicked, this, &Layout::openMovieFromOtherPage);
 
     settingsPage = new Settings(this);
     ui->settingsPageLayout->addWidget(settingsPage);
@@ -118,6 +121,7 @@ void Layout::on_sidebarFavoritesButton_clicked() {
 void Layout::on_sidebarAuthButton_clicked() {
     if (UserSession::instance().isLoggedIn()) {
         setNavActive(NavCurrentButtonIndex::Profile);
+        profilePage->refresh();
         ui->stackedWidget->setCurrentWidget(ui->profileStackPage);
     } else {
         this->hide();

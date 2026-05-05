@@ -13,22 +13,692 @@
   <property name="windowTitle">
    <string>Profile</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <property name="styleSheet">
+   <string notr="true">#Profile {
+    background-color: #0F0F11;
+}
+QScrollArea {
+    border: none;
+    background-color: transparent;
+}
+QScrollArea > QWidget#qt_scrollarea_viewport {
+    background-color: transparent;
+}
+#profileScrollContent,
+#headerCard,
+#statsRow,
+#genresSection,
+#favoritesSection,
+#favoritesPreviewStack,
+#favoritesPreviewGridPage,
+#favoritesPreviewEmptyPage,
+#genresStack,
+#genresChipsPage,
+#genresEmptyPage,
+#genresChipsRow {
+    background-color: transparent;
+}
+#headerCard {
+    background-color: #181818;
+    border: 1px solid #181818;
+    border-radius: 12px;
+}
+#avatarLabel {
+    background-color: #AE1A19;
+    color: #FFFFFF;
+    border-radius: 40px;
+    font-size: 32px;
+    font-weight: 700;
+    min-width: 80px;
+    min-height: 80px;
+    max-width: 80px;
+    max-height: 80px;
+}
+#usernameLabel {
+    color: #FFFFFF;
+    font-size: 22px;
+    font-weight: 700;
+}
+#memberLabel {
+    color: #6C6C6E;
+    font-size: 12px;
+}
+#editProfileButton {
+    background-color: #AE1A19;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+}
+#editProfileButton:hover {
+    background-color: #951615;
+}
+#logoutButton {
+    background-color: transparent;
+    color: #EF4444;
+    border: 1px solid #EF4444;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 600;
+}
+#logoutButton:hover {
+    background-color: rgba(239, 68, 68, 0.08);
+}
+#favoritesStatTile,
+#genresStatTile,
+#recommendationsStatTile {
+    background-color: #181818;
+    border: 1px solid #181818;
+    border-radius: 10px;
+}
+#favoritesStatValue,
+#genresStatValue,
+#recommendationsStatValue {
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 700;
+}
+#favoritesStatLabel,
+#genresStatLabel,
+#recommendationsStatLabel {
+    color: #6C6C6E;
+    font-size: 12px;
+}
+#genresTitleLabel,
+#favoritesTitleLabel {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 600;
+}
+#viewAllFavoritesButton {
+    background-color: transparent;
+    color: #AE1A19;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+}
+#viewAllFavoritesButton:hover {
+    color: #951615;
+}
+#emptyGenresLabel,
+#emptyFavoritesLabel {
+    color: #6C6C6E;
+    font-size: 13px;
+}
+#openSettingsLink {
+    background-color: transparent;
+    color: #AE1A19;
+    border: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    padding: 0;
+}
+#openSettingsLink:hover {
+    color: #951615;
+}
+QFrame#movieCard {
+    background-color: #181818;
+    border-radius: 8px;
+    border: 1px solid #181818;
+}
+QFrame#movieCard:hover {
+    background-color: #232325;
+    border: 1px solid #2A2A2C;
+}
+QLabel#movieCardTitle {
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 600;
+}
+QLabel#movieCardGenres {
+    color: #6C6C6E;
+    font-size: 11px;
+}
+QLabel#movieCardRating {
+    color: #FFFFFF;
+    font-size: 12px;
+}
+QLabel#movieCardReviews {
+    color: #6C6C6E;
+    font-size: 12px;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="profileRootLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
    <item>
-    <widget class="QLabel" name="profileLabel">
-     <property name="text">
-      <string>This is the profile page</string>
+    <widget class="QScrollArea" name="profileScrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
      </property>
-     <property name="alignment">
-      <set>Qt::AlignmentFlag::AlignCenter</set>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
      </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="logoutButton">
-     <property name="text">
-      <string>Logout</string>
-     </property>
+     <widget class="QWidget" name="profileScrollContent">
+      <layout class="QVBoxLayout" name="profileContentLayout">
+       <property name="spacing">
+        <number>20</number>
+       </property>
+       <property name="leftMargin">
+        <number>24</number>
+       </property>
+       <property name="topMargin">
+        <number>24</number>
+       </property>
+       <property name="rightMargin">
+        <number>24</number>
+       </property>
+       <property name="bottomMargin">
+        <number>24</number>
+       </property>
+       <item>
+        <widget class="QFrame" name="headerCard">
+         <layout class="QHBoxLayout" name="headerLayout">
+          <property name="spacing">
+           <number>16</number>
+          </property>
+          <property name="leftMargin">
+           <number>20</number>
+          </property>
+          <property name="topMargin">
+           <number>20</number>
+          </property>
+          <property name="rightMargin">
+           <number>20</number>
+          </property>
+          <property name="bottomMargin">
+           <number>20</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="avatarLabel">
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="text">
+             <string>?</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="headerTextLayout">
+            <property name="spacing">
+             <number>4</number>
+            </property>
+            <item>
+             <widget class="QLabel" name="usernameLabel">
+              <property name="text">
+               <string>Username</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="memberLabel">
+              <property name="text">
+               <string>Member</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <spacer name="headerSpacer">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item>
+           <widget class="QPushButton" name="editProfileButton">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>Edit Profile</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="logoutButton">
+            <property name="cursor">
+             <cursorShape>PointingHandCursor</cursorShape>
+            </property>
+            <property name="text">
+             <string>Log out</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="statsRow" native="true">
+         <layout class="QHBoxLayout" name="statsLayout">
+          <property name="spacing">
+           <number>16</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QFrame" name="favoritesStatTile">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <layout class="QVBoxLayout" name="favoritesStatLayout">
+             <property name="spacing">
+              <number>4</number>
+             </property>
+             <property name="leftMargin">
+              <number>16</number>
+             </property>
+             <property name="topMargin">
+              <number>14</number>
+             </property>
+             <property name="rightMargin">
+              <number>16</number>
+             </property>
+             <property name="bottomMargin">
+              <number>14</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="favoritesStatValue">
+               <property name="text">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="favoritesStatLabel">
+               <property name="text">
+                <string>Favorites</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="genresStatTile">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <layout class="QVBoxLayout" name="genresStatLayout">
+             <property name="spacing">
+              <number>4</number>
+             </property>
+             <property name="leftMargin">
+              <number>16</number>
+             </property>
+             <property name="topMargin">
+              <number>14</number>
+             </property>
+             <property name="rightMargin">
+              <number>16</number>
+             </property>
+             <property name="bottomMargin">
+              <number>14</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="genresStatValue">
+               <property name="text">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="genresStatLabel">
+               <property name="text">
+                <string>Interest genres</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="recommendationsStatTile">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <layout class="QVBoxLayout" name="recommendationsStatLayout">
+             <property name="spacing">
+              <number>4</number>
+             </property>
+             <property name="leftMargin">
+              <number>16</number>
+             </property>
+             <property name="topMargin">
+              <number>14</number>
+             </property>
+             <property name="rightMargin">
+              <number>16</number>
+             </property>
+             <property name="bottomMargin">
+              <number>14</number>
+             </property>
+             <item>
+              <widget class="QLabel" name="recommendationsStatValue">
+               <property name="text">
+                <string>0</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="recommendationsStatLabel">
+               <property name="text">
+                <string>Recommendations</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="genresSection" native="true">
+         <layout class="QVBoxLayout" name="genresSectionLayout">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="QLabel" name="genresTitleLabel">
+            <property name="text">
+             <string>My genres</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QStackedWidget" name="genresStack">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="genresChipsPage">
+             <layout class="QVBoxLayout" name="genresChipsPageLayout">
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QWidget" name="genresChipsRow" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <layout class="QHBoxLayout" name="genresChipsLayout">
+                 <property name="spacing">
+                  <number>8</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <spacer name="genresChipsSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="genresEmptyPage">
+             <layout class="QHBoxLayout" name="genresEmptyLayout">
+              <property name="spacing">
+               <number>6</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <item>
+               <widget class="QLabel" name="emptyGenresLabel">
+                <property name="text">
+                 <string>No genres picked yet —</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="openSettingsLink">
+                <property name="cursor">
+                 <cursorShape>PointingHandCursor</cursorShape>
+                </property>
+                <property name="text">
+                 <string>set them in Settings</string>
+                </property>
+                <property name="flat">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="genresEmptySpacer">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QWidget" name="favoritesSection" native="true">
+         <layout class="QVBoxLayout" name="favoritesSectionLayout">
+          <property name="spacing">
+           <number>10</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <layout class="QHBoxLayout" name="favoritesHeaderLayout">
+            <item>
+             <widget class="QLabel" name="favoritesTitleLabel">
+              <property name="text">
+               <string>My favorites</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="favoritesHeaderSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <widget class="QPushButton" name="viewAllFavoritesButton">
+              <property name="cursor">
+               <cursorShape>PointingHandCursor</cursorShape>
+              </property>
+              <property name="text">
+               <string>View all</string>
+              </property>
+              <property name="flat">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QStackedWidget" name="favoritesPreviewStack">
+            <property name="currentIndex">
+             <number>0</number>
+            </property>
+            <widget class="QWidget" name="favoritesPreviewGridPage">
+             <layout class="QGridLayout" name="favoritesPreviewGrid">
+              <property name="horizontalSpacing">
+               <number>24</number>
+              </property>
+              <property name="verticalSpacing">
+               <number>32</number>
+              </property>
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="favoritesPreviewEmptyPage">
+             <layout class="QVBoxLayout" name="favoritesPreviewEmptyLayout">
+              <item>
+               <widget class="QLabel" name="emptyFavoritesLabel">
+                <property name="text">
+                 <string>No favorites yet.</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="profileBottomSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>
