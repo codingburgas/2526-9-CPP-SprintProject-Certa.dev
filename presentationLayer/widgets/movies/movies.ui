@@ -91,8 +91,23 @@ QComboBox QAbstractItemView {
     color: #FFFFFF;
     selection-background-color: #AE1A19;
     border: 1px solid #181818;
+    border-radius: 10px;
     outline: 0;
     padding: 4px;
+    margin-top: 6px;
+}
+QComboBox QAbstractItemView::item {
+    min-height: 24px;
+    border-radius: 6px;
+    padding-left: 6px;
+}
+QComboBox QAbstractItemView::item:hover {
+    background-color: #951615;
+    color: #FFFFFF;
+}
+QComboBox QAbstractItemView::item:selected {
+    background-color: #AE1A19;
+    color: #FFFFFF;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="moviesRootLayout">
