@@ -11,6 +11,17 @@ Movies::Movies(QWidget *parent) : QWidget(parent), ui(new Ui::Movies) {
         ui->moviesGrid->setColumnStretch(col, 1);
     }
 
+    ui->sortComboBox->addItem("Default", static_cast<int>(SortMode::Default));
+    ui->sortComboBox->addItem("Highest rated first", static_cast<int>(SortMode::RatingHighLow));
+    ui->sortComboBox->addItem("Lowest rated first", static_cast<int>(SortMode::RatingLowHigh));
+    ui->sortComboBox->addItem("Newest first", static_cast<int>(SortMode::YearNewOld));
+    ui->sortComboBox->addItem("Oldest first", static_cast<int>(SortMode::YearOldNew));
+
+    populateGenreFilter();
+
+    connect(ui->sortComboBox, &QComboBox::currentIndexChanged, this, &Movies::onSortChanged);
+    connect(ui->genreComboBox, &QComboBox::currentTextChanged, this, &Movies::onGenreChanged);
+
     moviePage = new Movie(this);
     ui->moviePageHostLayout->addWidget(moviePage);
     connect(moviePage, &Movie::backRequested, this, &Movies::showList);
@@ -19,6 +30,20 @@ Movies::Movies(QWidget *parent) : QWidget(parent), ui(new Ui::Movies) {
     showList();
 
     loadMovies();
+}
+
+void Movies::populateGenreFilter() {
+    ui->genreComboBox->addItem("All genres");
+
+    MovieResponse response = MovieService::getAllGenres();
+    if (!response.success) {
+        qDebug() << "Failed to load genres:" << response.errorMessage;
+        return;
+    }
+
+    for (int i = 0; i < response.data.size(); i++) {
+        ui->genreComboBox->addItem(response.data[i]);
+    }
 }
 
 Movies::~Movies() {
@@ -42,7 +67,7 @@ void Movies::loadMovies() {
     }
 
     _allMovies = response.movies;
-    renderMovies(_allMovies);
+    applyFilters();
 }
 
 void Movies::reloadMovies() {
@@ -53,25 +78,107 @@ void Movies::reloadMovies() {
     }
 
     _allMovies = response.movies;
-    filterMovies(_currentQuery);
+    applyFilters();
 }
 
 void Movies::filterMovies(const QString &query) {
     _currentQuery = query;
+    applyFilters();
+}
 
-    if (query.isEmpty()) {
-        renderMovies(_allMovies);
-        return;
+void Movies::onSortChanged(int index) {
+    _currentSort = static_cast<SortMode>(ui->sortComboBox->itemData(index).toInt());
+    applyFilters();
+}
+
+void Movies::onGenreChanged(const QString &genre) {
+    _currentGenre = (genre == "All genres") ? "" : genre;
+    applyFilters();
+}
+
+void Movies::applyFilters() {
+    QVector<MovieDto> result;
+    for (int i = 0; i < _allMovies.size(); i++) {
+        const MovieDto movie = _allMovies[i];
+
+        if (!_currentQuery.isEmpty() &&
+            !movie.title.contains(_currentQuery, Qt::CaseInsensitive)) {
+            continue;
+        }
+
+        if (!_currentGenre.isEmpty() &&
+            !movie.genres.contains(_currentGenre, Qt::CaseInsensitive)) {
+            continue;
+        }
+
+        result.append(movie);
     }
 
-    QVector<MovieDto> filtered;
-    for (int i = 0; i < _allMovies.size(); i++) {
-        MovieDto movie = _allMovies[i];
-        if (movie.title.toLower().contains(query.toLower())) {
-            filtered.append(movie);
+    switch (_currentSort) {
+        case SortMode::RatingHighLow: sortByRatingDesc(result);
+            break;
+        case SortMode::RatingLowHigh: sortByRatingAsc(result);
+            break;
+        case SortMode::YearNewOld: sortByYearDesc(result);
+            break;
+        case SortMode::YearOldNew: sortByYearAsc(result);
+            break;
+        case SortMode::Default: break;
+    }
+
+    renderMovies(result);
+}
+
+void Movies::sortByRatingDesc(QVector<MovieDto> &movies) {
+    int n = movies.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (movies[j].rating < movies[j + 1].rating) {
+                MovieDto temp = movies[j];
+                movies[j] = movies[j + 1];
+                movies[j + 1] = temp;
+            }
         }
     }
-    renderMovies(filtered);
+}
+
+void Movies::sortByRatingAsc(QVector<MovieDto> &movies) {
+    int n = movies.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (movies[j].rating > movies[j + 1].rating) {
+                MovieDto temp = movies[j];
+                movies[j] = movies[j + 1];
+                movies[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void Movies::sortByYearDesc(QVector<MovieDto> &movies) {
+    int n = movies.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (movies[j].year < movies[j + 1].year) {
+                MovieDto temp = movies[j];
+                movies[j] = movies[j + 1];
+                movies[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void Movies::sortByYearAsc(QVector<MovieDto> &movies) {
+    int n = movies.size();
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (movies[j].year > movies[j + 1].year) {
+                MovieDto temp = movies[j];
+                movies[j] = movies[j + 1];
+                movies[j + 1] = temp;
+            }
+        }
+    }
 }
 
 void Movies::renderMovies(const QVector<MovieDto> &movies) {

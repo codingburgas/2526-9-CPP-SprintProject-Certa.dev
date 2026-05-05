@@ -27,17 +27,44 @@ public:
 public slots:
     void filterMovies(const QString &query);
 
+private slots:
+    void onSortChanged(int index);
+
+    void onGenreChanged(const QString &genre);
+
 private:
     const int COLUMNS = 3;
+
+    enum class SortMode {
+        Default,
+        RatingHighLow,
+        RatingLowHigh,
+        YearNewOld,
+        YearOldNew
+    };
 
     Ui::Movies *ui;
     Movie *moviePage;
     QVector<MovieDto> _allMovies;
     QString _currentQuery;
+    QString _currentGenre;
+    SortMode _currentSort = SortMode::Default;
 
     void loadMovies();
 
     void reloadMovies();
+
+    void populateGenreFilter();
+
+    void applyFilters();
+
+    void sortByRatingDesc(QVector<MovieDto> &movies);
+
+    void sortByRatingAsc(QVector<MovieDto> &movies);
+
+    void sortByYearDesc(QVector<MovieDto> &movies);
+
+    void sortByYearAsc(QVector<MovieDto> &movies);
 
     void renderMovies(const QVector<MovieDto> &movies);
 };
