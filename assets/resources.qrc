@@ -39,5 +39,21 @@
         <file>posters/the_wolf_of_wall_street.jpg</file>
         <file>posters/titanic.jpg</file>
         <file>posters/whiplash.jpg</file>
+
+        <file>actors/anthony_hopkins.jpg</file>
+        <file>actors/brad_pitt.jpg</file>
+        <file>actors/christian_bale.jpg</file>
+        <file>actors/john_travolta.jpg</file>
+        <file>actors/keanu_reeves.jpg</file>
+        <file>actors/leonardo_dicaprio.jpg</file>
+        <file>actors/marlon_brando.jpg</file>
+        <file>actors/matthew_mcconaughey.jpg</file>
+        <file>actors/michael_j_fox.jpg</file>
+        <file>actors/morgan_freeman.jpg</file>
+        <file>actors/robert_de_niro.jpg</file>
+        <file>actors/russell_crowe.jpg</file>
+        <file>actors/sigourney_weaver.jpg</file>
+        <file>actors/tom_hanks.jpg</file>
+        <file>actors/tom_hardy.jpg</file>
     </qresource>
 </RCC>
