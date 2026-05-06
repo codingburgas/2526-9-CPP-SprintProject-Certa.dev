@@ -178,6 +178,36 @@ QPushButton#movieFavoriteButton:checked {
     background-color: #232325;
     border-color: #FACC15;
     color: #FACC15;
+}
+QLabel#castTitleLabel {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 700;
+}
+QLabel#castEmptyLabel {
+    color: #6C6C6E;
+    font-size: 13px;
+}
+QFrame#actorChip {
+    background-color: #181818;
+    border-radius: 12px;
+    border: 1px solid #181818;
+}
+QFrame#actorChip:hover {
+    background-color: #232325;
+    border: 1px solid #2A2A2C;
+}
+QLabel#actorChipName {
+    color: #FFFFFF;
+    font-size: 12px;
+    font-weight: 600;
+}
+QScrollArea#castScrollArea {
+    border: none;
+    background-color: transparent;
+}
+#castScrollContent {
+    background-color: transparent;
 }</string>
   </property>
   <layout class="QVBoxLayout" name="moviePageRootLayout">
@@ -411,6 +441,70 @@ QPushButton#movieFavoriteButton:checked {
           </layout>
          </item>
         </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="castTitleLabel">
+         <property name="text">
+          <string>Cast</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="castEmptyLabel">
+         <property name="text">
+          <string>No cast information available.</string>
+         </property>
+         <property name="visible">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QScrollArea" name="castScrollArea">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::NoFrame</enum>
+         </property>
+         <property name="horizontalScrollBarPolicy">
+          <enum>Qt::ScrollBarAsNeeded</enum>
+         </property>
+         <property name="verticalScrollBarPolicy">
+          <enum>Qt::ScrollBarAlwaysOff</enum>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>124</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>16777215</width>
+           <height>124</height>
+          </size>
+         </property>
+         <widget class="QWidget" name="castScrollContent">
+          <layout class="QHBoxLayout" name="castListLayout">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+          </layout>
+         </widget>
+        </widget>
        </item>
        <item>
         <widget class="QFrame" name="addReviewCard">

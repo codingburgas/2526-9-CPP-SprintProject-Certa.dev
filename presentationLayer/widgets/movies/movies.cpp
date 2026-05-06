@@ -26,6 +26,7 @@ Movies::Movies(QWidget *parent) : QWidget(parent), ui(new Ui::Movies) {
     ui->moviePageHostLayout->addWidget(moviePage);
     connect(moviePage, &Movie::backRequested, this, &Movies::showList);
     connect(moviePage, &Movie::reviewSubmitted, this, &Movies::reloadMovies);
+    connect(moviePage, &Movie::actorClicked, this, &Movies::actorClicked);
 
     showList();
 

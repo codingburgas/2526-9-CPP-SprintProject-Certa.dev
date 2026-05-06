@@ -46,6 +46,20 @@ set(PROJECT_SOURCES
     presentationLayer/widgets/common/movieCard/movieCard.cpp
     presentationLayer/widgets/common/movieCard/movieCard.h
 
+    presentationLayer/widgets/actors/actors.cpp
+    presentationLayer/widgets/actors/actors.h
+    presentationLayer/widgets/actors/actors.ui
+
+    presentationLayer/widgets/actors/actor/actor.cpp
+    presentationLayer/widgets/actors/actor/actor.h
+    presentationLayer/widgets/actors/actor/actor.ui
+
+    presentationLayer/widgets/common/actorCard/actorCard.cpp
+    presentationLayer/widgets/common/actorCard/actorCard.h
+
+    presentationLayer/widgets/common/actorChip/actorChip.cpp
+    presentationLayer/widgets/common/actorChip/actorChip.h
+
     presentationLayer/widgets/recommendations/recommendations.cpp
     presentationLayer/widgets/recommendations/recommendations.h
     presentationLayer/widgets/recommendations/recommendations.ui
@@ -78,6 +92,9 @@ set(PROJECT_SOURCES
     serviceLayer/movieService/movieService.cpp
     serviceLayer/movieService/movieService.h
 
+    serviceLayer/actorService/actorService.cpp
+    serviceLayer/actorService/actorService.h
+
 
     dataAccessLayer/database/database.cpp
     dataAccessLayer/database/database.h
@@ -91,6 +108,9 @@ set(PROJECT_SOURCES
     dataAccessLayer/movieRepository/movieRepository.cpp
     dataAccessLayer/movieRepository/movieRepository.h
 
+    dataAccessLayer/actorRepository/actorRepository.cpp
+    dataAccessLayer/actorRepository/actorRepository.h
+
     models/user/user.h
     models/user/userResponse.h
     models/user/userStatus.h
@@ -101,6 +121,10 @@ set(PROJECT_SOURCES
     models/movie/movieDto.h
     models/movie/movieStatus.h
     models/movie/movieResponse.h
+
+    models/actor/actorDto.h
+    models/actor/actorStatus.h
+    models/actor/actorResponse.h
 )
 
 qt_add_executable(Certa.dev
@@ -124,6 +148,10 @@ target_include_directories(Certa.dev PRIVATE
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/movies
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/movies/movie
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/common/movieCard
+    ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/actors
+    ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/actors/actor
+    ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/common/actorCard
+    ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/common/actorChip
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/recommendations
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/favorites
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/settings
@@ -134,16 +162,19 @@ target_include_directories(Certa.dev PRIVATE
     ${CMAKE_SOURCE_DIR}/serviceLayer/authService/passwordHasher
     ${CMAKE_SOURCE_DIR}/serviceLayer/userService
     ${CMAKE_SOURCE_DIR}/serviceLayer/movieService
+    ${CMAKE_SOURCE_DIR}/serviceLayer/actorService
 
     ${CMAKE_SOURCE_DIR}/dataAccessLayer/database
     ${CMAKE_SOURCE_DIR}/dataAccessLayer/authRepository
     ${CMAKE_SOURCE_DIR}/dataAccessLayer/userRepository
     ${CMAKE_SOURCE_DIR}/dataAccessLayer/movieRepository
+    ${CMAKE_SOURCE_DIR}/dataAccessLayer/actorRepository
 
     ${CMAKE_SOURCE_DIR}/models
     ${CMAKE_SOURCE_DIR}/models/auth
     ${CMAKE_SOURCE_DIR}/models/user
     ${CMAKE_SOURCE_DIR}/models/movie
+    ${CMAKE_SOURCE_DIR}/models/actor
 )
 
 include(GNUInstallDirs)

@@ -16,6 +16,11 @@ Layout::Layout(QWidget *parent) : QMainWindow(parent), ui(new Ui::Layout) {
 
     moviesPage = new Movies(this);
     ui->moviesPageLayout->addWidget(moviesPage);
+    connect(moviesPage, &Movies::actorClicked, this, &Layout::openActorFromOtherPage);
+
+    actorsPage = new Actors(this);
+    ui->actorsPageLayout->addWidget(actorsPage);
+    connect(actorsPage, &Actors::movieClicked, this, &Layout::openMovieFromOtherPage);
 
     recommendationsPage = new Recommendations(this);
     ui->recommendationsPageLayout->addWidget(recommendationsPage);
@@ -80,6 +85,7 @@ Layout::~Layout() {
 void Layout::setNavActive(NavCurrentButtonIndex index) {
     ui->sidebarHomeButton->setChecked(index == NavCurrentButtonIndex::Home);
     ui->sidebarMoviesButton->setChecked(index == NavCurrentButtonIndex::Movies);
+    ui->sidebarActorsButton->setChecked(index == NavCurrentButtonIndex::Actors);
     ui->sidebarRecommendationsButton->setChecked(index == NavCurrentButtonIndex::Recommendations);
     ui->sidebarFavoritesButton->setChecked(index == NavCurrentButtonIndex::Favorites);
     ui->sidebarAuthButton->setChecked(index == NavCurrentButtonIndex::Profile);
@@ -90,6 +96,12 @@ void Layout::openMovieFromOtherPage(int movieId) {
     setNavActive(NavCurrentButtonIndex::Movies);
     moviesPage->openMoviePage(movieId);
     ui->stackedWidget->setCurrentWidget(ui->moviesStackPage);
+}
+
+void Layout::openActorFromOtherPage(int actorId) {
+    setNavActive(NavCurrentButtonIndex::Actors);
+    actorsPage->openActorPage(actorId);
+    ui->stackedWidget->setCurrentWidget(ui->actorsStackPage);
 }
 
 void Layout::on_sidebarHomeButton_clicked() {
@@ -104,6 +116,12 @@ void Layout::on_sidebarMoviesButton_clicked() {
     moviesPage->filterMovies("");
     moviesPage->showList();
     ui->stackedWidget->setCurrentWidget(ui->moviesStackPage);
+}
+
+void Layout::on_sidebarActorsButton_clicked() {
+    setNavActive(NavCurrentButtonIndex::Actors);
+    actorsPage->showList();
+    ui->stackedWidget->setCurrentWidget(ui->actorsStackPage);
 }
 
 void Layout::on_sidebarRecommendationsButton_clicked() {

@@ -3,6 +3,8 @@
 #include <QPixmap>
 #include <QScrollBar>
 #include <QStyle>
+#include "actorChip.h"
+#include "actorService.h"
 #include "movieService.h"
 #include "ui_movie.h"
 #include "userSession.h"
@@ -31,6 +33,7 @@ void Movie::loadMovie(int movieId) {
     }
 
     renderMovie(movieResponse.movie);
+    renderCast();
     renderReviews();
     refreshAuthState();
     refreshFavoriteState();
@@ -120,6 +123,43 @@ void Movie::renderReviews() {
         }
 
         ui->reviewsListLayout->addWidget(item);
+    }
+}
+
+void Movie::renderCast() {
+    clearCastLayout();
+
+    GetActorsResponse response = ActorService::getActorsForMovie(currentMovieId);
+    if (!response.success || response.actors.isEmpty()) {
+        ui->castEmptyLabel->setText(response.success
+                                        ? "No cast information available."
+                                        : response.errorMessage);
+        ui->castEmptyLabel->setVisible(true);
+        ui->castScrollArea->setVisible(false);
+        return;
+    }
+
+    ui->castEmptyLabel->setVisible(false);
+    ui->castScrollArea->setVisible(true);
+
+    for (int i = 0; i < response.actors.size(); i++) {
+        ActorChip *chip = new ActorChip(response.actors[i], this);
+        connect(chip, &ActorChip::clicked, this, &Movie::actorClicked);
+        ui->castListLayout->addWidget(chip);
+    }
+    ui->castListLayout->addStretch();
+}
+
+void Movie::clearCastLayout() {
+    for (int i = ui->castListLayout->count() - 1; i >= 0; i--) {
+        QLayoutItem *item = ui->castListLayout->takeAt(i);
+        if (!item) continue;
+
+        QWidget *widget = item->widget();
+        if (widget) {
+            widget->deleteLater();
+        }
+        delete item;
     }
 }
 

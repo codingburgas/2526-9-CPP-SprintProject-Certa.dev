@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Actor</class>
+ <widget class="QWidget" name="Actor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Actor</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#Actor {
+    background-color: #0F0F11;
+}
+QScrollArea {
+    border: none;
+    background-color: transparent;
+}
+QScrollArea > QWidget#qt_scrollarea_viewport {
+    background-color: transparent;
+}
+#actorScrollContent {
+    background-color: transparent;
+}
+QPushButton#actorBackButton {
+    color: #FFFFFF;
+    background-color: #181818;
+    border: 1px solid #181818;
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 600;
+}
+QPushButton#actorBackButton:hover {
+    background-color: #232325;
+    border-color: #2A2A2C;
+}
+QLabel#actorNameLabel {
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 700;
+}
+QLabel#actorMetaLabel {
+    color: #6C6C6E;
+    font-size: 13px;
+}
+QLabel#actorDescriptionLabel {
+    color: #E6E6E6;
+    font-size: 14px;
+    line-height: 1.4;
+}
+QLabel#actorPosterLabel {
+    background-color: #181818;
+    border-radius: 8px;
+}
+QLabel#filmographyTitleLabel {
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 700;
+}
+QLabel#filmographyEmptyLabel {
+    color: #6C6C6E;
+    font-size: 13px;
+}
+QFrame#movieCard {
+    background-color: #181818;
+    border-radius: 8px;
+    border: 1px solid #181818;
+}
+QFrame#movieCard:hover {
+    background-color: #232325;
+    border: 1px solid #2A2A2C;
+}
+QLabel#movieCardTitle {
+    color: #FFFFFF;
+    font-size: 13px;
+    font-weight: 600;
+}
+QLabel#movieCardGenres {
+    color: #6C6C6E;
+    font-size: 11px;
+}
+QLabel#movieCardRating {
+    color: #FFFFFF;
+    font-size: 12px;
+}
+QLabel#movieCardReviews {
+    color: #6C6C6E;
+    font-size: 12px;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="actorPageRootLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <widget class="QScrollArea" name="actorScrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <widget class="QWidget" name="actorScrollContent">
+      <layout class="QVBoxLayout" name="actorScrollLayout">
+       <property name="spacing">
+        <number>20</number>
+       </property>
+       <property name="leftMargin">
+        <number>24</number>
+       </property>
+       <property name="topMargin">
+        <number>24</number>
+       </property>
+       <property name="rightMargin">
+        <number>24</number>
+       </property>
+       <property name="bottomMargin">
+        <number>24</number>
+       </property>
+       <item>
+        <layout class="QHBoxLayout" name="actorBackRow">
+         <item>
+          <widget class="QPushButton" name="actorBackButton">
+           <property name="text">
+            <string>← Back</string>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <spacer name="actorBackSpacer">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
+           </property>
+           <property name="sizeHint" stdset="0">
+            <size>
+             <width>40</width>
+             <height>20</height>
+            </size>
+           </property>
+          </spacer>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <layout class="QHBoxLayout" name="actorHeaderLayout">
+         <property name="spacing">
+          <number>20</number>
+         </property>
+         <item>
+          <widget class="QLabel" name="actorPosterLabel">
+           <property name="minimumSize">
+            <size>
+             <width>220</width>
+             <height>320</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>220</width>
+             <height>320</height>
+            </size>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="actorInfoLayout">
+           <property name="spacing">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="actorNameLabel">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="actorMetaLabel">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="actorDescriptionLabel">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignTop</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="actorInfoSpacer">
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>20</width>
+               <height>10</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QLabel" name="filmographyTitleLabel">
+         <property name="text">
+          <string>Filmography</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="filmographyEmptyLabel">
+         <property name="text">
+          <string>No movies on file for this actor.</string>
+         </property>
+         <property name="visible">
+          <bool>false</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QGridLayout" name="filmographyGrid">
+         <property name="horizontalSpacing">
+          <number>24</number>
+         </property>
+         <property name="verticalSpacing">
+          <number>32</number>
+         </property>
+        </layout>
+       </item>
+       <item>
+        <spacer name="bottomSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../../../../assets/resources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

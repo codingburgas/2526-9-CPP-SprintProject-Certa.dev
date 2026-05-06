@@ -1,8 +1,3 @@
-# -----------------------------
-# Certa.dev: Gitignore
-# Generated/IDE/build files for Qt + CMake projects
-# -----------------------------
-
 # Build directories
 /build/
 /Desktop_Qt_*/
@@ -87,6 +82,3 @@ Thumbs.db
 
 # Assets build output
 /assets/build/
-
-# Ignore Qt Creator project files that are generated
-*.qmlproject.user

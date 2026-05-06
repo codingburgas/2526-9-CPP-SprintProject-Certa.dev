@@ -27,6 +27,9 @@ public:
 public slots:
     void filterMovies(const QString &query);
 
+signals:
+    void actorClicked(int actorId);
+
 private slots:
     void onSortChanged(int index);
 

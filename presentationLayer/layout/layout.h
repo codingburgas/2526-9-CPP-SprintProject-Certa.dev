@@ -1,6 +1,7 @@
 #pragma once
 
 #include <QMainWindow>
+#include "actors.h"
 #include "favorites.h"
 #include "home.h"
 #include "movies.h"
@@ -30,6 +31,8 @@ private slots:
 
     void on_sidebarMoviesButton_clicked();
 
+    void on_sidebarActorsButton_clicked();
+
     void on_sidebarRecommendationsButton_clicked();
 
     void on_sidebarFavoritesButton_clicked();
@@ -42,6 +45,7 @@ private:
     enum class NavCurrentButtonIndex {
         Home,
         Movies,
+        Actors,
         Recommendations,
         Favorites,
         Profile,
@@ -54,9 +58,12 @@ private:
 
     void openMovieFromOtherPage(int movieId);
 
+    void openActorFromOtherPage(int actorId);
+
     Ui::Layout *ui;
     Home *homePage;
     Movies *moviesPage;
+    Actors *actorsPage;
     Recommendations *recommendationsPage;
     Favorites *favoritesPage;
     Profile *profilePage;

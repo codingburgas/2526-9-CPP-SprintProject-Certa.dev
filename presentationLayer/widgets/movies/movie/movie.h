@@ -27,6 +27,8 @@ signals:
 
     void favoriteToggled();
 
+    void actorClicked(int actorId);
+
 private slots:
     void on_movieBackButton_clicked();
 
@@ -45,6 +47,10 @@ private:
     void renderMovie(const MovieDto &movie);
 
     void renderReviews();
+
+    void renderCast();
+
+    void clearCastLayout();
 
     void clearReviewsLayout();
 
