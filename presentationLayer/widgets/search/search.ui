@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Search</class>
+ <widget class="QWidget" name="Search">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>700</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Search</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">#Search {
+    background-color: #0F0F11;
+}
+#searchTitleLabel {
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 600;
+}
+#searchSectionLabel {
+    color: #FFFFFF;
+    font-size: 16px;
+    font-weight: 600;
+}
+#searchEmptyLabel {
+    color: #6C6C6E;
+    font-size: 13px;
+}
+QScrollArea {
+    border: none;
+    background-color: transparent;
+}
+QScrollArea > QWidget#qt_scrollarea_viewport {
+    background-color: transparent;
+}
+#scrollContent {
+    background-color: transparent;
+}
+QFrame#searchMovieCard, QFrame#searchActorCard {
+    background-color: #181818;
+    border-radius: 8px;
+    border: 1px solid #181818;
+}
+QFrame#searchMovieCard:hover, QFrame#searchActorCard:hover {
+    background-color: #232325;
+    border: 1px solid #2A2A2C;
+}
+QLabel#searchMovieCardTitle, QLabel#searchActorCardName {
+    color: #FFFFFF;
+    font-size: 15px;
+    font-weight: 600;
+}
+QLabel#searchMovieCardYear, QLabel#searchMovieCardRating {
+    color: #FFFFFF;
+    font-size: 12px;
+}
+QLabel#searchMovieCardGenres {
+    color: #6C6C6E;
+    font-size: 12px;
+}
+QLabel#searchMovieCardDescription, QLabel#searchActorCardDescription {
+    color: #6C6C6E;
+    font-size: 12px;
+}
+QLabel#searchActorCardMovies {
+    color: #6C6C6E;
+    font-size: 12px;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="searchRootLayout">
+   <property name="spacing">
+    <number>16</number>
+   </property>
+   <property name="leftMargin">
+    <number>24</number>
+   </property>
+   <property name="topMargin">
+    <number>16</number>
+   </property>
+   <property name="rightMargin">
+    <number>24</number>
+   </property>
+   <property name="bottomMargin">
+    <number>24</number>
+   </property>
+   <item>
+    <widget class="QLabel" name="searchTitleLabel">
+     <property name="text">
+      <string>Search</string>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QScrollArea" name="searchScrollArea">
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <widget class="QWidget" name="scrollContent">
+      <layout class="QVBoxLayout" name="resultsLayout">
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

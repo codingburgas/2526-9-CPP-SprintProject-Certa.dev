@@ -82,11 +82,6 @@ void Movies::reloadMovies() {
     applyFilters();
 }
 
-void Movies::filterMovies(const QString &query) {
-    _currentQuery = query;
-    applyFilters();
-}
-
 void Movies::onSortChanged(int index) {
     _currentSort = static_cast<SortMode>(ui->sortComboBox->itemData(index).toInt());
     applyFilters();
@@ -101,11 +96,6 @@ void Movies::applyFilters() {
     QVector<MovieDto> result;
     for (int i = 0; i < _allMovies.size(); i++) {
         const MovieDto movie = _allMovies[i];
-
-        if (!_currentQuery.isEmpty() &&
-            !movie.title.contains(_currentQuery, Qt::CaseInsensitive)) {
-            continue;
-        }
 
         if (!_currentGenre.isEmpty() &&
             !movie.genres.contains(_currentGenre, Qt::CaseInsensitive)) {

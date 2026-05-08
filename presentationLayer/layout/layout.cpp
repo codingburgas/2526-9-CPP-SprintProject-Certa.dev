@@ -52,6 +52,11 @@ Layout::Layout(QWidget *parent) : QMainWindow(parent), ui(new Ui::Layout) {
         on_sidebarHomeButton_clicked();
     });
 
+    searchPage = new Search(this);
+    ui->searchPageLayout->addWidget(searchPage);
+    connect(searchPage, &Search::movieClicked, this, &Layout::openMovieFromOtherPage);
+    connect(searchPage, &Search::actorClicked, this, &Layout::openActorFromOtherPage);
+
     if (UserSession::instance().isLoggedIn()) {
         ui->sidebarAuthButton->setText("  Profile");
     }
@@ -72,10 +77,22 @@ void Layout::refreshUserBadge() {
 }
 
 void Layout::on_topBarSearchLineEdit_textEdited(const QString &text) {
-    setNavActive(NavCurrentButtonIndex::Movies);
-    moviesPage->showList();
-    ui->stackedWidget->setCurrentWidget(ui->moviesStackPage);
-    moviesPage->filterMovies(text);
+    if (text.trimmed().isEmpty()) {
+        on_sidebarHomeButton_clicked();
+        return;
+    }
+
+    ui->sidebarHomeButton->setChecked(false);
+    ui->sidebarMoviesButton->setChecked(false);
+    ui->sidebarActorsButton->setChecked(false);
+    ui->sidebarRecommendationsButton->setChecked(false);
+    ui->sidebarFavoritesButton->setChecked(false);
+    ui->sidebarAuthButton->setChecked(false);
+    ui->sidebarSettingsButton->setChecked(false);
+
+    searchPage->setQuery(text);
+
+    ui->stackedWidget->setCurrentWidget(ui->searchStackPage);
 }
 
 Layout::~Layout() {
@@ -83,6 +100,8 @@ Layout::~Layout() {
 }
 
 void Layout::setNavActive(NavCurrentButtonIndex index) {
+    ui->topBarSearchLineEdit->clear();
+
     ui->sidebarHomeButton->setChecked(index == NavCurrentButtonIndex::Home);
     ui->sidebarMoviesButton->setChecked(index == NavCurrentButtonIndex::Movies);
     ui->sidebarActorsButton->setChecked(index == NavCurrentButtonIndex::Actors);
@@ -112,8 +131,6 @@ void Layout::on_sidebarHomeButton_clicked() {
 
 void Layout::on_sidebarMoviesButton_clicked() {
     setNavActive(NavCurrentButtonIndex::Movies);
-    ui->topBarSearchLineEdit->clear();
-    moviesPage->filterMovies("");
     moviesPage->showList();
     ui->stackedWidget->setCurrentWidget(ui->moviesStackPage);
 }
