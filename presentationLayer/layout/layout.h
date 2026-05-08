@@ -7,6 +7,7 @@
 #include "movies.h"
 #include "profile.h"
 #include "recommendations.h"
+#include "search.h"
 #include "settings.h"
 
 QT_BEGIN_NAMESPACE
@@ -68,4 +69,5 @@ private:
     Favorites *favoritesPage;
     Profile *profilePage;
     Settings *settingsPage;
+    Search *searchPage;
 };

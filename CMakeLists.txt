@@ -76,6 +76,16 @@ set(PROJECT_SOURCES
     presentationLayer/widgets/profile/profile.h
     presentationLayer/widgets/profile/profile.ui
 
+    presentationLayer/widgets/search/search.cpp
+    presentationLayer/widgets/search/search.h
+    presentationLayer/widgets/search/search.ui
+
+    presentationLayer/widgets/common/searchMovieCard/searchMovieCard.cpp
+    presentationLayer/widgets/common/searchMovieCard/searchMovieCard.h
+
+    presentationLayer/widgets/common/searchActorCard/searchActorCard.cpp
+    presentationLayer/widgets/common/searchActorCard/searchActorCard.h
+
 
     serviceLayer/userSession/userSession.cpp
     serviceLayer/userSession/userSession.h
@@ -156,6 +166,9 @@ target_include_directories(Certa.dev PRIVATE
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/favorites
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/settings
     ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/profile
+    ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/search
+    ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/common/searchMovieCard
+    ${CMAKE_SOURCE_DIR}/presentationLayer/widgets/common/searchActorCard
 
     ${CMAKE_SOURCE_DIR}/serviceLayer/userSession
     ${CMAKE_SOURCE_DIR}/serviceLayer/authService

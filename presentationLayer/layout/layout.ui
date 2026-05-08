@@ -474,7 +474,7 @@
           </rect>
          </property>
          <property name="placeholderText">
-          <string>Search movies...</string>
+          <string>Search movies and actors...</string>
          </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
@@ -617,6 +617,22 @@
         </widget>
         <widget class="QWidget" name="profileStackPage">
          <layout class="QVBoxLayout" name="profilePageLayout">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="searchStackPage">
+         <layout class="QVBoxLayout" name="searchPageLayout">
           <property name="leftMargin">
            <number>0</number>
           </property>

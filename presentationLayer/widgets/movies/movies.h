@@ -24,9 +24,6 @@ public:
 
     void openMoviePage(int movieId);
 
-public slots:
-    void filterMovies(const QString &query);
-
 signals:
     void actorClicked(int actorId);
 
@@ -49,7 +46,6 @@ private:
     Ui::Movies *ui;
     Movie *moviePage;
     QVector<MovieDto> _allMovies;
-    QString _currentQuery;
     QString _currentGenre;
     SortMode _currentSort = SortMode::Default;
 
