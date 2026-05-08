@@ -42,4 +42,56 @@ namespace MovieService {
     GetMoviesResponse getFavoriteMovies(const QString &username) {
         return MovieRepository::getFavoriteMovies(username);
     }
+
+    void sortByRatingDesc(QVector<MovieDto> &movies) {
+        int n = movies.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (movies[j].rating < movies[j + 1].rating) {
+                    MovieDto temp = movies[j];
+                    movies[j] = movies[j + 1];
+                    movies[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    void sortByRatingAsc(QVector<MovieDto> &movies) {
+        int n = movies.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (movies[j].rating > movies[j + 1].rating) {
+                    MovieDto temp = movies[j];
+                    movies[j] = movies[j + 1];
+                    movies[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    void sortByYearDesc(QVector<MovieDto> &movies) {
+        int n = movies.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (movies[j].year < movies[j + 1].year) {
+                    MovieDto temp = movies[j];
+                    movies[j] = movies[j + 1];
+                    movies[j + 1] = temp;
+                }
+            }
+        }
+    }
+
+    void sortByYearAsc(QVector<MovieDto> &movies) {
+        int n = movies.size();
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = 0; j < n - i - 1; j++) {
+                if (movies[j].year > movies[j + 1].year) {
+                    MovieDto temp = movies[j];
+                    movies[j] = movies[j + 1];
+                    movies[j + 1] = temp;
+                }
+            }
+        }
+    }
 }

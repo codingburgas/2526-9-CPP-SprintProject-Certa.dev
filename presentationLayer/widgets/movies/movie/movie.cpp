@@ -88,7 +88,7 @@ void Movie::renderReviews() {
     ui->reviewsEmptyLabel->setVisible(false);
 
     for (int i = 0; i < response.reviews.size(); i++) {
-        const Review &review = response.reviews[i];
+        const Review review = response.reviews[i];
 
         QFrame *item = new QFrame(this);
         item->setObjectName("reviewItem");
@@ -131,9 +131,7 @@ void Movie::renderCast() {
 
     GetActorsResponse response = ActorService::getActorsForMovie(currentMovieId);
     if (!response.success || response.actors.isEmpty()) {
-        ui->castEmptyLabel->setText(response.success
-                                        ? "No cast information available."
-                                        : response.errorMessage);
+        ui->castEmptyLabel->setText(response.success ? "No cast information available." : response.errorMessage);
         ui->castEmptyLabel->setVisible(true);
         ui->castScrollArea->setVisible(false);
         return;

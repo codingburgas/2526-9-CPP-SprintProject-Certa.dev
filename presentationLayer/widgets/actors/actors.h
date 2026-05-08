@@ -49,13 +49,5 @@ private:
 
     void applySort();
 
-    void sortByLastNameAsc(QVector<ActorDto> &actors);
-
-    void sortByLastNameDesc(QVector<ActorDto> &actors);
-
-    void sortByMoviesDesc(QVector<ActorDto> &actors);
-
-    void sortByMoviesAsc(QVector<ActorDto> &actors);
-
     void renderActors(const QVector<ActorDto> &actors);
 };

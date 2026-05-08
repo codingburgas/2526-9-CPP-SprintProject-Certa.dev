@@ -61,69 +61,17 @@ void Actors::applySort() {
     QVector<ActorDto> result = _allActors;
 
     switch (_currentSort) {
-        case SortMode::NameAsc: sortByLastNameAsc(result);
+        case SortMode::NameAsc: ActorService::sortByLastNameAsc(result);
             break;
-        case SortMode::NameDesc: sortByLastNameDesc(result);
+        case SortMode::NameDesc: ActorService::sortByLastNameDesc(result);
             break;
-        case SortMode::MoviesHighLow: sortByMoviesDesc(result);
+        case SortMode::MoviesHighLow: ActorService::sortByMoviesDesc(result);
             break;
-        case SortMode::MoviesLowHigh: sortByMoviesAsc(result);
+        case SortMode::MoviesLowHigh: ActorService::sortByMoviesAsc(result);
             break;
     }
 
     renderActors(result);
-}
-
-void Actors::sortByLastNameAsc(QVector<ActorDto> &actors) {
-    int n = actors.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (actors[j].lastName.compare(actors[j + 1].lastName, Qt::CaseInsensitive) > 0) {
-                ActorDto temp = actors[j];
-                actors[j] = actors[j + 1];
-                actors[j + 1] = temp;
-            }
-        }
-    }
-}
-
-void Actors::sortByLastNameDesc(QVector<ActorDto> &actors) {
-    int n = actors.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (actors[j].lastName.compare(actors[j + 1].lastName, Qt::CaseInsensitive) < 0) {
-                ActorDto temp = actors[j];
-                actors[j] = actors[j + 1];
-                actors[j + 1] = temp;
-            }
-        }
-    }
-}
-
-void Actors::sortByMoviesDesc(QVector<ActorDto> &actors) {
-    int n = actors.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (actors[j].movieCount < actors[j + 1].movieCount) {
-                ActorDto temp = actors[j];
-                actors[j] = actors[j + 1];
-                actors[j + 1] = temp;
-            }
-        }
-    }
-}
-
-void Actors::sortByMoviesAsc(QVector<ActorDto> &actors) {
-    int n = actors.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (actors[j].movieCount > actors[j + 1].movieCount) {
-                ActorDto temp = actors[j];
-                actors[j] = actors[j + 1];
-                actors[j + 1] = temp;
-            }
-        }
-    }
 }
 
 void Actors::renderActors(const QVector<ActorDto> &actors) {

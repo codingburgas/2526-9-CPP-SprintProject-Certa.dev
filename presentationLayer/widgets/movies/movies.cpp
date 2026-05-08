@@ -106,70 +106,18 @@ void Movies::applyFilters() {
     }
 
     switch (_currentSort) {
-        case SortMode::RatingHighLow: sortByRatingDesc(result);
+        case SortMode::RatingHighLow: MovieService::sortByRatingDesc(result);
             break;
-        case SortMode::RatingLowHigh: sortByRatingAsc(result);
+        case SortMode::RatingLowHigh: MovieService::sortByRatingAsc(result);
             break;
-        case SortMode::YearNewOld: sortByYearDesc(result);
+        case SortMode::YearNewOld: MovieService::sortByYearDesc(result);
             break;
-        case SortMode::YearOldNew: sortByYearAsc(result);
+        case SortMode::YearOldNew: MovieService::sortByYearAsc(result);
             break;
         case SortMode::Default: break;
     }
 
     renderMovies(result);
-}
-
-void Movies::sortByRatingDesc(QVector<MovieDto> &movies) {
-    int n = movies.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (movies[j].rating < movies[j + 1].rating) {
-                MovieDto temp = movies[j];
-                movies[j] = movies[j + 1];
-                movies[j + 1] = temp;
-            }
-        }
-    }
-}
-
-void Movies::sortByRatingAsc(QVector<MovieDto> &movies) {
-    int n = movies.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (movies[j].rating > movies[j + 1].rating) {
-                MovieDto temp = movies[j];
-                movies[j] = movies[j + 1];
-                movies[j + 1] = temp;
-            }
-        }
-    }
-}
-
-void Movies::sortByYearDesc(QVector<MovieDto> &movies) {
-    int n = movies.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (movies[j].year < movies[j + 1].year) {
-                MovieDto temp = movies[j];
-                movies[j] = movies[j + 1];
-                movies[j + 1] = temp;
-            }
-        }
-    }
-}
-
-void Movies::sortByYearAsc(QVector<MovieDto> &movies) {
-    int n = movies.size();
-    for (int i = 0; i < n - 1; i++) {
-        for (int j = 0; j < n - i - 1; j++) {
-            if (movies[j].year > movies[j + 1].year) {
-                MovieDto temp = movies[j];
-                movies[j] = movies[j + 1];
-                movies[j + 1] = temp;
-            }
-        }
-    }
 }
 
 void Movies::renderMovies(const QVector<MovieDto> &movies) {

@@ -1,6 +1,8 @@
 #pragma once
 
+#include <QVector>
 #include "movieResponse.h"
+#include "movieDto.h"
 
 namespace MovieService {
     MovieResponse getAllGenres();
@@ -23,4 +25,12 @@ namespace MovieService {
     FavoriteResponse removeFavorite(const QString &username, int movieId);
 
     GetMoviesResponse getFavoriteMovies(const QString &username);
+
+    void sortByRatingDesc(QVector<MovieDto> &movies);
+
+    void sortByRatingAsc(QVector<MovieDto> &movies);
+
+    void sortByYearDesc(QVector<MovieDto> &movies);
+
+    void sortByYearAsc(QVector<MovieDto> &movies);
 }
