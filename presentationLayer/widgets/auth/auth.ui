@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Auth</string>
+   <string>Certa.dev</string>
   </property>
   <widget class="QStackedWidget" name="authStackedWidget">
    <property name="geometry">
