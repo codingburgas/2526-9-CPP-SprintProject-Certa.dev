@@ -26,7 +26,11 @@ signals:
 
     void openFavoritesRequested();
 
+    void exploreActorsRequested();
+
     void movieClicked(int movieId);
+
+    void actorClicked(int actorId);
 
 private slots:
     void on_guestSignInButton_clicked();
@@ -34,6 +38,8 @@ private slots:
     void on_exploreMoreButton_clicked();
 
     void on_openFavoritesButton_clicked();
+
+    void on_exploreActorsButton_clicked();
 
 private:
     const int PREVIEW_LIMIT = 3;
@@ -45,7 +51,11 @@ private:
 
     void clearFavoritesGrid();
 
+    void clearActorsGrid();
+
     void loadRecommendations();
 
     void loadFavorites();
+
+    void loadActors();
 };

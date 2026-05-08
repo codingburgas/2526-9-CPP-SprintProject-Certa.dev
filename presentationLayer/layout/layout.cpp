@@ -12,7 +12,9 @@ Layout::Layout(QWidget *parent) : QMainWindow(parent), ui(new Ui::Layout) {
     connect(homePage, &Home::signInRequested, this, &Layout::on_sidebarAuthButton_clicked);
     connect(homePage, &Home::exploreRecommendationsRequested, this, &Layout::on_sidebarRecommendationsButton_clicked);
     connect(homePage, &Home::openFavoritesRequested, this, &Layout::on_sidebarFavoritesButton_clicked);
+    connect(homePage, &Home::exploreActorsRequested, this, &Layout::on_sidebarActorsButton_clicked);
     connect(homePage, &Home::movieClicked, this, &Layout::openMovieFromOtherPage);
+    connect(homePage, &Home::actorClicked, this, &Layout::openActorFromOtherPage);
 
     moviesPage = new Movies(this);
     ui->moviesPageLayout->addWidget(moviesPage);
