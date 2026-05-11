@@ -25,15 +25,11 @@ namespace MovieRepository {
     GetMoviesResponse getAllMovies() {
         QSqlQuery query;
         query.prepare(
-            "SELECT m.id, m.title, m.description, m.year, m.director, "
-            "COALESCE(AVG(r.rating), 0) AS avg_rating, m.poster_path, "
-            "COUNT(r.id) AS review_count, "
+            "SELECT m.id, m.title, m.description, m.year, m.director, m.poster_path, "
             "(SELECT GROUP_CONCAT(g.name, ', ') "
             " FROM movie_genres mg JOIN genres g ON g.id = mg.genre_id "
             " WHERE mg.movie_id = m.id) AS genres "
             "FROM movies m "
-            "LEFT JOIN reviews r ON r.movie_id = m.id "
-            "GROUP BY m.id "
             "ORDER BY m.title"
         );
 
@@ -49,21 +45,35 @@ namespace MovieRepository {
             movie.description = query.value(2).toString();
             movie.year = query.value(3).toInt();
             movie.director = query.value(4).toString();
-            movie.rating = query.value(5).toDouble();
-            movie.posterPath = query.value(6).toString();
-            movie.reviewCount = query.value(7).toInt();
-            movie.genres = query.value(8).toString();
+            movie.rating = 0.0;
+            movie.posterPath = query.value(5).toString();
+            movie.reviewCount = 0;
+            movie.genres = query.value(6).toString();
             movies.append(movie);
         }
 
         return {.success = true, .errorMessage = "", .movies = movies};
     }
 
+    QVector<double> getRatingsForMovie(int movieId) {
+        QVector<double> ratings;
+        QSqlQuery query;
+        query.prepare("SELECT rating FROM reviews WHERE movie_id = ?");
+        query.addBindValue(movieId);
+
+        if (!query.exec()) {
+            return ratings;
+        }
+
+        while (query.next()) {
+            ratings.append(query.value(0).toDouble());
+        }
+        return ratings;
+    }
+
     GetMoviesResponse getRecommendedMovies(const QString &username, int limit) {
         QString sql =
-            "SELECT m.id, m.title, m.description, m.year, m.director, "
-            "COALESCE(AVG(r.rating), 0) AS avg_rating, m.poster_path, "
-            "COUNT(r.id) AS review_count, "
+            "SELECT m.id, m.title, m.description, m.year, m.director, m.poster_path, "
             "(SELECT GROUP_CONCAT(g.name, ', ') "
             " FROM movie_genres mg JOIN genres g ON g.id = mg.genre_id "
             " WHERE mg.movie_id = m.id) AS genres, "
@@ -72,10 +82,9 @@ namespace MovieRepository {
             "JOIN movie_genres mg2 ON mg2.movie_id = m.id "
             "JOIN user_interests ui ON ui.genre_id = mg2.genre_id "
             "JOIN users u ON u.id = ui.user_id "
-            "LEFT JOIN reviews r ON r.movie_id = m.id "
             "WHERE u.username = ? "
             "GROUP BY m.id "
-            "ORDER BY match_count DESC, avg_rating DESC, m.title";
+            "ORDER BY match_count DESC, m.title";
 
         if (limit > 0) {
             sql += " LIMIT ?";
@@ -100,10 +109,10 @@ namespace MovieRepository {
             movie.description = query.value(2).toString();
             movie.year = query.value(3).toInt();
             movie.director = query.value(4).toString();
-            movie.rating = query.value(5).toDouble();
-            movie.posterPath = query.value(6).toString();
-            movie.reviewCount = query.value(7).toInt();
-            movie.genres = query.value(8).toString();
+            movie.rating = 0.0;
+            movie.posterPath = query.value(5).toString();
+            movie.reviewCount = 0;
+            movie.genres = query.value(6).toString();
             movies.append(movie);
         }
 
@@ -113,16 +122,12 @@ namespace MovieRepository {
     GetMovieResponse getMovieById(int id) {
         QSqlQuery query;
         query.prepare(
-            "SELECT m.id, m.title, m.description, m.year, m.director, "
-            "COALESCE(AVG(r.rating), 0) AS avg_rating, m.poster_path, "
-            "COUNT(r.id) AS review_count, "
+            "SELECT m.id, m.title, m.description, m.year, m.director, m.poster_path, "
             "(SELECT GROUP_CONCAT(g.name, ', ') "
             " FROM movie_genres mg JOIN genres g ON g.id = mg.genre_id "
             " WHERE mg.movie_id = m.id) AS genres "
             "FROM movies m "
-            "LEFT JOIN reviews r ON r.movie_id = m.id "
-            "WHERE m.id = ? "
-            "GROUP BY m.id"
+            "WHERE m.id = ?"
         );
         query.addBindValue(id);
 
@@ -140,10 +145,10 @@ namespace MovieRepository {
         movie.description = query.value(2).toString();
         movie.year = query.value(3).toInt();
         movie.director = query.value(4).toString();
-        movie.rating = query.value(5).toDouble();
-        movie.posterPath = query.value(6).toString();
-        movie.reviewCount = query.value(7).toInt();
-        movie.genres = query.value(8).toString();
+        movie.rating = 0.0;
+        movie.posterPath = query.value(5).toString();
+        movie.reviewCount = 0;
+        movie.genres = query.value(6).toString();
 
         return {.success = true, .errorMessage = "", .movie = movie};
     }
@@ -273,18 +278,14 @@ namespace MovieRepository {
     GetMoviesResponse getFavoriteMovies(const QString &username) {
         QSqlQuery query;
         query.prepare(
-            "SELECT m.id, m.title, m.description, m.year, m.director, "
-            "COALESCE(AVG(r.rating), 0) AS avg_rating, m.poster_path, "
-            "COUNT(r.id) AS review_count, "
+            "SELECT m.id, m.title, m.description, m.year, m.director, m.poster_path, "
             "(SELECT GROUP_CONCAT(g.name, ', ') "
             " FROM movie_genres mg JOIN genres g ON g.id = mg.genre_id "
             " WHERE mg.movie_id = m.id) AS genres "
             "FROM movies m "
             "JOIN user_favorites uf ON uf.movie_id = m.id "
             "JOIN users u ON u.id = uf.user_id "
-            "LEFT JOIN reviews r ON r.movie_id = m.id "
             "WHERE u.username = ? "
-            "GROUP BY m.id "
             "ORDER BY m.title"
         );
         query.addBindValue(username);
@@ -301,10 +302,10 @@ namespace MovieRepository {
             movie.description = query.value(2).toString();
             movie.year = query.value(3).toInt();
             movie.director = query.value(4).toString();
-            movie.rating = query.value(5).toDouble();
-            movie.posterPath = query.value(6).toString();
-            movie.reviewCount = query.value(7).toInt();
-            movie.genres = query.value(8).toString();
+            movie.rating = 0.0;
+            movie.posterPath = query.value(5).toString();
+            movie.reviewCount = 0;
+            movie.genres = query.value(6).toString();
             movies.append(movie);
         }
 

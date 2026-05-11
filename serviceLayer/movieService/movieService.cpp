@@ -2,20 +2,55 @@
 #include "movieRepository.h"
 
 namespace MovieService {
+    double sumRatings(const QVector<double> &ratings, const int i) {
+        if (i >= ratings.size()) {
+            return 0.0;
+        }
+
+        return ratings[i] + sumRatings(ratings, i + 1);
+    }
+
+    void fillRating(MovieDto &movie) {
+        QVector<double> ratings = MovieRepository::getRatingsForMovie(movie.id);
+        int count = ratings.size();
+        double sum = sumRatings(ratings, 0);
+        movie.reviewCount = count;
+        movie.rating = count > 0 ? sum / count : 0.0;
+    }
+
+    void fillRatings(QVector<MovieDto> &movies) {
+        int n = movies.size();
+        for (int i = 0; i < n; i++) {
+            fillRating(movies[i]);
+        }
+    }
+
     MovieResponse getAllGenres() {
         return MovieRepository::getAllGenres();
     }
 
     GetMoviesResponse getAllMovies() {
-        return MovieRepository::getAllMovies();
+        GetMoviesResponse response = MovieRepository::getAllMovies();
+        if (response.success) {
+            fillRatings(response.movies);
+        }
+        return response;
     }
 
     GetMoviesResponse getRecommendedMovies(const QString &username, int limit) {
-        return MovieRepository::getRecommendedMovies(username, limit);
+        GetMoviesResponse response = MovieRepository::getRecommendedMovies(username, limit);
+        if (response.success) {
+            fillRatings(response.movies);
+        }
+        return response;
     }
 
     GetMovieResponse getMovieById(int id) {
-        return MovieRepository::getMovieById(id);
+        GetMovieResponse response = MovieRepository::getMovieById(id);
+        if (response.success) {
+            fillRating(response.movie);
+        }
+        return response;
     }
 
     ReviewResponse createReview(const QString &username, const int &movieId, const double &rating,
@@ -40,7 +75,11 @@ namespace MovieService {
     }
 
     GetMoviesResponse getFavoriteMovies(const QString &username) {
-        return MovieRepository::getFavoriteMovies(username);
+        GetMoviesResponse response = MovieRepository::getFavoriteMovies(username);
+        if (response.success) {
+            fillRatings(response.movies);
+        }
+        return response;
     }
 
     void sortByRatingDesc(QVector<MovieDto> &movies) {

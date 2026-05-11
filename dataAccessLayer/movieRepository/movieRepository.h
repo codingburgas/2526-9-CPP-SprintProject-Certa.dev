@@ -1,11 +1,14 @@
 #pragma once
 
+#include <QVector>
 #include "movieResponse.h"
 
 namespace MovieRepository {
     MovieResponse getAllGenres();
 
     GetMoviesResponse getAllMovies();
+
+    QVector<double> getRatingsForMovie(int movieId);
 
     GetMoviesResponse getRecommendedMovies(const QString &username, int limit = -1);
 
